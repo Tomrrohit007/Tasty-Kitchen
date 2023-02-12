@@ -3,7 +3,7 @@ import {useState} from 'react'
 import { Link, useNavigate, Outlet, Navigate, useLocation} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import "./index.css"
-import { CartGlobal } from '../Contexts/cartListContext'
+import { CartGlobal } from '../CartContext/cartListContext'
 
 function Header() {
 

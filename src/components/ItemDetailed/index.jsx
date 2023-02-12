@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import { TailSpin } from "react-loader-spinner";
 import Footer from "../Footer";
 import "./index.css";
-import { CartGlobal } from "../Contexts/cartListContext";
+import { CartGlobal } from "../CartContext/cartListContext";
 
 function ItemDetailed() {
   const { id } = useParams();

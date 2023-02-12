@@ -85,10 +85,16 @@
 .total-cost-panel{
     display: flex;
     justify-content: space-between;
-    padding:0px 46px;
+    padding: 0px 70px;
+    margin: 0px;
     margin-bottom: 30px;
 }
 .hr{
     width: 90%;
     margin-top: 40px;
+}
+.price-total{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

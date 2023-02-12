@@ -1,0 +1,92 @@
+.items-cont, .item-list-cont {
+  width: 1110px;
+  align-self: center;
+}
+.home-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.restaurants-heading {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+  margin: 0px;
+  color: #183b56;
+  padding-bottom: 10px;
+}
+.para {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding-top:  5px;
+  line-height: 24px;
+  color: #64748b;
+  margin: 0px;
+}
+.filter {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: transparent;
+  line-height: 24px;
+  color: #475569;
+  outline: none;
+  border: none;
+}
+.filter-icon {
+  height: 24px;
+    width: 24px;
+    font-weight: 600;
+    color: #475569;
+    padding: 1px 8px;
+}
+.filter-cont{
+    display: flex;
+    align-items: center;
+}
+
+.upper-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px 0px;
+}
+hr{
+  width: 1110px;
+}
+
+.loader-cont{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.items-list{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px;
+  gap: 30px;
+}
+.pagination-cont{
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+  justify-content:center;
+}
+.pagination-para{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  text-align: center;
+  color: #334155;
+  font-weight: 600;
+}
+.arrow{
+  border: 1px solid black;
+  padding: 4px;
+}

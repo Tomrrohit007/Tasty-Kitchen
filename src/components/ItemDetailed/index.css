@@ -1,0 +1,90 @@
+.item-detailed-cont{
+    padding-top: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.upper-section-cont{
+    background-image: url("https://res.cloudinary.com/degjdup40/image/upload/v1675658993/Group_7418_rdszvo.png");
+    background-color: #333333;
+    min-height: 270px;
+    display: flex;
+    padding: 10px 0px;
+    justify-content: center;
+    width: 99vw!important;
+}
+
+.upper-section-inner-cont{
+    width: 1110px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.main-img{
+    height: 240px;
+    border-radius: 10px;
+}
+.food-item-name{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 48px;
+    letter-spacing: 0.2px;
+    color: #ff9900;
+}
+.location{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.nnn{
+    color: #ff9900;
+    font-weight: 600;
+
+}
+.itemss{
+    width: 100px;
+    
+}
+.vertical-line{
+    height: 72px;
+    margin-right: 20px;
+    background-color: #ff9900;
+    width: 2px;
+}
+
+.locationn{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    font-weight: 600;
+    color: #e49115;
+
+}
+.detailss-cont{
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    align-items: center;
+}
+.starrr{
+    padding-right:10px;
+}
+
+.food-items-list{
+    width: 960px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}

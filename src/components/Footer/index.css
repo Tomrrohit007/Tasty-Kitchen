@@ -1,0 +1,53 @@
+.footer{
+    width: 99vw;
+    height: 324px;
+    background: #0F172A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+}
+.tasty-logo-heading{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 48px;
+    color: #FFFFFF;
+    
+}
+.footer-logo{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px!important;
+}
+.footer-para, .contact{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.tasty-logo-heading, .footer-para, .contact{
+    margin: 0px;
+}
+
+.footer-icon{
+    color: white;
+    height: 40px;
+    width: 40px;
+}
+.insta-icon{
+    background-color: #0F172A;
+    color: white;
+    height: 40px;
+    width: 40px;
+}
+.icons{
+    display: flex;
+    gap: 33px;
+    margin-top: 30px;
+}

@@ -1,0 +1,31 @@
+.not-found-cont{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.not-found-heading{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 48px;
+    color: #1E293B;
+}
+.not-found-para{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    text-align: center;
+    width: 600px;
+    color: #475569;
+}
+.home-page-btn{
+    width: 123px;
+    height: 48px;
+    background-color: #F7931E;
+    border-radius: 12px;
+    color: #fff;
+}

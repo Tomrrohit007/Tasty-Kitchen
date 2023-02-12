@@ -3,8 +3,8 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 function FoodItem(props) {
-  const { details } = props;
-  const { id, name, imageUrl, rating, totalReviews, cuisine } = details;
+  const { details } = props
+  const { id, name, imageUrl, rating, totalReviews, cuisine } = details
   return (
     <Link to={`/restaurant/${id}`} className="links">
       <li className="item-cont">

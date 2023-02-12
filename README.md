@@ -6,7 +6,7 @@ This is an individual assessment. All work must be your own. You will also be gi
 
 ### Prerequisites
 
-#### UI Prerequisites
+
 
 <details>
 <summary>Click to view</summary>

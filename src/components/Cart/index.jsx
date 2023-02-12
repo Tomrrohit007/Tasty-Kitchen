@@ -33,7 +33,6 @@ function Cart() {
     localStorage.setItem("cartList", JSON.stringify(cartList))
     setQuantity(prev=>prev+1)
   }
-
   const decreBtn=(id)=>{
     cartList = cartList.map(eachCartItem=>{
       if(eachCartItem.id===id){
@@ -46,19 +45,12 @@ function Cart() {
     setQuantity(prev=>prev+1)
   }
 
-  const onOrderNow=()=>{
-    navigate("/")
-  }
-
 let totalPriceOfCart = 0
 for (let i of cartList){
   totalPriceOfCart = totalPriceOfCart + i.cost * i.count
 }
 
-  console.log(totalPriceOfCart)
-
-
-  const cartItemView = ()=>{
+const cartItemView = ()=>{
     return <div className='cart-main'>
        <div className='cart-cont'>
         <ul className='types'>
@@ -72,7 +64,7 @@ for (let i of cartList){
             <h1 className='order-total-heading total'>Order Total:</h1>
             <span className='price-total'>
               <h1 className='total-price-of-cart total'>₹  {totalPriceOfCart}.00</h1>
-              <button className='checkout-btn'>Place Order</button>
+              <button className='checkout-btn' onClick={()=>navigate("/payment")}>Place Order</button>
             </span>
         </div>
         </div>
@@ -86,7 +78,7 @@ for (let i of cartList){
         <img src='https://res.cloudinary.com/dzqa2dgzj/image/upload/v1675845284/cooking_1_arcyxq.svg' alt="" />
         <h1 className='no-order-heading'>No Orders Yet</h1>
         <p className="no-item-cart-para">Your cart is empty. Add something from the menu</p>
-        <button className='order-now' onClick={onOrderNow}>Order Now</button>
+        <button className='order-now' onClick={()=>navigate("/")}>Order Now</button>
     </div>
   }
   return (

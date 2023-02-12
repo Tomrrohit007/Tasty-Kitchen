@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FoodItem from "../FoodItemCard";
 import Carausel from "../Carausel";
 import Footer from "../Footer";
-import { TailSpin } from "react-loader-spinner";
+import Loader from "../Loader";
 import { BsFilterLeft } from "react-icons/bs";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Cookies from "js-cookie";
@@ -135,23 +135,11 @@ function Home() {
 
   }
 
-  const loader = ()=>{
-    return <div className="loader-cont">
-              <TailSpin
-          height="80"
-          width="80"
-          color="#F7931E"
-          ariaLabel="tail-spin-loading"
-          radius="1"
-          visible={true}
-        />
-    </div>
-  }
 
   // main render
   return (
     <>
-    {isLoading?(loader()):(fullView())}
+    {isLoading?(Loader()):(fullView())}
     </>
   )
 }

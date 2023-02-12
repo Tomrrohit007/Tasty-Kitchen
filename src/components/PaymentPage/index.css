@@ -1,0 +1,37 @@
+.go-to-home{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    width: 131px;
+    height: 32px;
+    background: #F7931E;
+    border-radius: 8px;
+}
+.payment-para{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #64748B;
+    text-align: center;
+}
+.payment-heading{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 32px;
+    color: #1E293B; 
+}
+.payment-img{
+    height: 64px;
+    width: 64px;
+}
+.payment-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 88vh;
+}

@@ -1,32 +1,28 @@
-import {useState} from 'react'
-
+import {useEffect} from 'react'
 import { Link, useNavigate, Outlet, Navigate, useLocation} from 'react-router-dom'
 import Cookies from 'js-cookie'
+import { CartGlobal } from '../CartContext/CartListContext'
+import { HeaderGlobal } from '../CartContext/HeaderContext'
 import "./index.css"
-import { CartGlobal } from '../CartContext/cartListContext'
 
 function Header() {
 
   const {cartList} = CartGlobal()
+  const {activeRoute, changeRoute} = HeaderGlobal()
   const cartCount = cartList.length
 
   let navigate = useNavigate()
   let location = useLocation()
-  const [activeRoute, changeRoute] = useState(location.pathname)
+
+  useEffect(()=>{
+    changeRoute(location.pathname)
+  })
+ 
   
   const onClickLogout=()=>{
     Cookies.remove("jwt_token")
     navigate("/login")
   }
-
-  const onClickHome=()=>{
-    changeRoute("/")
-  }
-
-  const onClickCart=()=>{
-    changeRoute("/cart")
-  }
-
   
   const jwtToken = Cookies.get("jwt_token")
   if(jwtToken===undefined){
@@ -40,7 +36,7 @@ function Header() {
   
   return (
     <>
-    <nav className='main-nav'>
+    <nav initial={{y:"-100vh"}} animate={{y:0}} className='main-nav'>
       <div className='header-main-cont'>
 
       <button className='nav-bar' onClick={onClickLogo}>
@@ -50,14 +46,14 @@ function Header() {
       <ul className='links'>
         <Link className='linkss' to="/" >
           <li className="nav-links home" >
-            <button className={activeRoute==="/"? "active":""} onClick={onClickHome}>
+            <button className={activeRoute==="/cart" || activeRoute==="/payment"? "":"active"}>
               Home
             </button>
             </li>
         </Link>
-        <Link className='linkss' to="/cart">
+        <Link className='linkss' to="/cart" >
           <li className="nav-links cart" >
-          <button className={activeRoute==="/cart"?"active":""} onClick={onClickCart}>
+          <button className={activeRoute==="/cart" || activeRoute==="/payment"?"active":""} >
               Cart {cartCount>0  && <span className='cart-count'>{cartCount}</span>}
             </button>
           </li>

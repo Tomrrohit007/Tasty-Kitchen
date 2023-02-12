@@ -3,10 +3,10 @@ import { BsStarFill } from "react-icons/bs";
 import AvailableFood from "../AvailableFood";
 import { useNavigate ,useParams } from "react-router-dom";
 import Cookies from "js-cookie";
-import { TailSpin } from "react-loader-spinner";
+import Loader from "../Loader";
 import Footer from "../Footer";
 import "./index.css";
-import { CartGlobal } from "../CartContext/cartListContext";
+import { CartGlobal } from "../CartContext/CartListContext";
 
 function ItemDetailed() {
   const { id } = useParams();
@@ -15,7 +15,6 @@ function ItemDetailed() {
   const [isLoading, setLoading] = useState(false);
 
   const {cartList, setCartList} = CartGlobal()
-  console.log(cartList)
 
   const onAddToList = (item) =>{
     const isPresent = cartList.some(eachItem=>eachItem.id===item.id)
@@ -170,7 +169,7 @@ function ItemDetailed() {
   return (
     <>
       {isLoading ? (
-        loader()
+        <Loader/>
       ) : (
         <div className="item-detailed-cont">
           {introSection()}

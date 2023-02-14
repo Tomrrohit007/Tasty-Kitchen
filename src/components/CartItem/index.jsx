@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { BiMinus } from "react-icons/bi";
 import { BsPlus } from "react-icons/bs";
+import {AiFillDelete} from "react-icons/ai"
 import "./index.css"
 
 function CartItem(props) {
-  const { eachCartItem, increBtn, decreBtn } = props;
+  const { eachCartItem, increBtn, decreBtn, removeItemFromCart } = props;
   const { id, cost, count, name, imageUrl } = eachCartItem;
   const [itemCount, setItemCount] = useState(count)
 
@@ -48,6 +49,9 @@ function CartItem(props) {
       </span>
       {foodQuantity()}
         <p className="food-cost cart-item-cost">₹  {itemCount * cost}.00</p>
+        <button className="delete-btn" onClick={()=>removeItemFromCart(id)}>
+          <AiFillDelete className="delete-icon" />
+        </button>
     </li>
   )
 }

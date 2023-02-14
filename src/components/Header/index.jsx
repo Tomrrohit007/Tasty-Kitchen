@@ -36,7 +36,7 @@ function Header() {
   
   return (
     <>
-    <nav initial={{y:"-100vh"}} animate={{y:0}} className='main-nav'>
+    <nav className='main-nav'>
       <div className='header-main-cont'>
 
       <button className='nav-bar' onClick={onClickLogo}>

@@ -7,14 +7,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 54px;
     margin: 30px 0px;
+    margin-right: 54px;
 }
 .image-name-cont{
     display: flex;
     gap: 14px;
     align-items: center;
-    flex: 31%;
+    flex: 17%;
 }
 .cart-item-name{
     font-style: normal;
@@ -26,13 +26,15 @@
     }
 
 .cart-item-cost{
-    flex: 30%;
+    flex: 18%;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 24px;
     color: #FFA412!important;
-    text-align: right;
+    text-align: center;
+    box-sizing:border-box;
+    padding-left: 70px;
 
 }
 .plus-icon, .minus-icon{
@@ -46,5 +48,9 @@
     justify-content: space-between;
     align-items: center;
     width: 90px;
-
+    margin-left: 5px;
+}
+.delete-icon{
+    color: #663f00;
+    font-size: 20px;
 }

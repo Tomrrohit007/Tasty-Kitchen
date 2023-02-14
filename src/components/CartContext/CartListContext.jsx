@@ -8,6 +8,7 @@ const initialCartList = initialList === null? [] : JSON.parse(initialList);
 
 export const ContextProvider=({children})=>{
     const [cartList, setCartList] = useState(initialCartList)
+    
     return <CartContext.Provider value={{cartList, setCartList}}>
         {children}
     </CartContext.Provider>

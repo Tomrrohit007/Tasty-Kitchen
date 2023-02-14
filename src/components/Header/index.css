@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     background: #F8FAFC;
+    padding: 12px 0px;
 }
 .logout-btn{
     width: 73px;

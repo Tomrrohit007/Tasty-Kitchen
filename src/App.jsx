@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom"
 import React, { Suspense } from "react"
+import ProtectedRoute from "./components/ProtectedRoute"
 import Loader from "./components/Loader"
 
 const LoginPage = React.lazy(() => import("./components/LoginPage"))
@@ -16,7 +17,7 @@ function App() {
       <Suspense fallback={<Loader/>} >
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          <Route element={<Header />}>
+          <Route element={<ProtectedRoute Comp={Header}/>}>
             <Route path="/">
               <Route index element={<Home />} />
               <Route path="/restaurant/:id" element={<ItemDetailed />} />

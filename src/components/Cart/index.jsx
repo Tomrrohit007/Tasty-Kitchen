@@ -3,47 +3,44 @@ import {useNavigate } from 'react-router-dom'
 import CartItem from '../CartItem'
 import Footer from '../Footer'
 import "./index.css"
+import { CartGlobal } from '../CartContext/CartListContext'
 
 const typesList = [
-  {id:1, name:"Item"},
-  {id:2, name:"Quantity"},
-  {id:3, name:"Price"}]
+  {id:1, name:"Item", class:"item"},
+  {id:2, name:"Quantity", class:"quantity"},
+  {id:3, name:"Price", class:"price"}]
 
 function Cart() {
   let navigate = useNavigate()
-
-  let cartList = []
-
-  const localCartList = localStorage.getItem("cartList")
-  if(localCartList!==null){
-    cartList = JSON.parse(localCartList)
-  }
+  const {cartList, setCartList} = CartGlobal()
 
   const [countQuantity, setQuantity] = useState(0)
 
+  const removeItemFromCart=(id)=>{
+    setCartList((prevList)=>prevList.filter(eachCartItem=>eachCartItem.id!==id))
+  }
 
   const increBtn=(id)=>{
-    cartList = cartList.map(eachCartItem=>{
+     setCartList((prevList)=>prevList.map(eachCartItem=>{
       if(eachCartItem.id===id){
         const updateCount = eachCartItem.count + 1
         return {...eachCartItem, count:updateCount}
       }
       return eachCartItem
-    })
-    localStorage.setItem("cartList", JSON.stringify(cartList))
+    }))
     setQuantity(prev=>prev+1)
   }
   const decreBtn=(id)=>{
-    cartList = cartList.map(eachCartItem=>{
+    setCartList((prevList)=>prevList.map(eachCartItem=>{
       if(eachCartItem.id===id){
         const updateCount = eachCartItem.count - 1
         return {...eachCartItem, count:updateCount}
       }
       return eachCartItem
-    })
-    localStorage.setItem("cartList", JSON.stringify(cartList))
+    }))
     setQuantity(prev=>prev+1)
   }
+  localStorage.setItem("cartList", JSON.stringify(cartList))
 
 let totalPriceOfCart = 0
 for (let i of cartList){
@@ -54,10 +51,10 @@ const cartItemView = ()=>{
     return <div className='cart-main'>
        <div className='cart-cont'>
         <ul className='types'>
-          {typesList.map(each=><li key={each.id} className='type-item' >{each.name}</li>)}
+          {typesList.map(each=><li key={each.id} className={`type-item ${each.class}`} >{each.name}</li>)}
         </ul>
         <ul className='cart-item-list'>
-          {cartList.map(eachCartItem=><CartItem eachCartItem={eachCartItem} key={eachCartItem.id} increBtn={increBtn} decreBtn={decreBtn} />)}
+          {cartList.map(eachCartItem=><CartItem eachCartItem={eachCartItem} key={eachCartItem.id} increBtn={increBtn} decreBtn={decreBtn} removeItemFromCart={removeItemFromCart} />)}
         </ul>
         <hr color='#CBD2D9' className='hr' />
         <div className='total-cost-panel'>

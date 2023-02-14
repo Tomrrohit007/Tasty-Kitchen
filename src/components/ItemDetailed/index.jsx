@@ -47,8 +47,14 @@ function ItemDetailed() {
   const onDecreaseCount=(itemId)=>{
     setCartList(prevList=> prevList.map(eachItem=>{
       if(eachItem.id===itemId){
-        const updatedCount = eachItem.count - 1
-        return {...eachItem, count:updatedCount}
+        if(eachItem.count===1){
+          prevList.pop(eachItem)       
+        }
+        else{
+          const updatedCount = eachItem.count - 1
+          return {...eachItem, count:updatedCount}
+        }
+        
       }
       return eachItem
     }))

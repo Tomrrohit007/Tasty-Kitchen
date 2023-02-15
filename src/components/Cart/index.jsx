@@ -72,10 +72,19 @@ function Cart() {
 
   const cartItemView = () => {
     return (
+      <AnimatePresence>
       <m.div
-        variants={mainVariants}
-        initial="initial"
-        animate="animate"
+      variants={mainVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{
+        damping: 13,
+        mass: 0.6,
+        type: "spring",
+        when: "beforeChildren",
+        ease: "easeInOut",
+      }}
         className="cart-main"
       >
         <div className="cart-cont">
@@ -88,7 +97,7 @@ function Cart() {
           </ul>
           <ul
             className="cart-item-list"
-          >
+            >
             <AnimatePresence>
               {cartList.map((eachCartItem, i) => (
                 <CartItem
@@ -113,7 +122,7 @@ function Cart() {
                 whileHover={{y:-4, opacity:0.8}}
                 className="checkout-btn"
                 onClick={() => navigate("/payment")}
-              >
+                >
                 Place Order
               </m.button>
             </span>
@@ -121,12 +130,24 @@ function Cart() {
         </div>
         <Footer />
       </m.div>
+      </AnimatePresence>
     );
   };
 
   const noItemView = () => {
     return (
-      <div className="no-item-cart-cont">
+      <m.div     
+      variants={mainVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{
+        damping: 13,
+        mass: 0.6,
+        type: "spring",
+        when: "beforeChildren",
+        ease: "easeInOut",
+      }} className="no-item-cart-cont">
         <img
           src="https://res.cloudinary.com/dzqa2dgzj/image/upload/v1675845284/cooking_1_arcyxq.svg"
           alt=""
@@ -138,25 +159,13 @@ function Cart() {
         <m.button whileHover={{y:-4} } className="order-now" onClick={() => navigate("/")}>
           Order Now
         </m.button>
-      </div>
+      </m.div>
     );
   };
   return (
-    <m.div
-    variants={mainVariants}
-    initial="initial"
-    animate="animate"
-    exit="exit"
-    transition={{
-      damping: 13,
-      mass: 0.6,
-      type: "spring",
-      when: "beforeChildren",
-      ease: "easeInOut",
-    }}
-    >
+    <>
       {cartList.length === 0 ? noItemView() : cartItemView()}
-    </m.div>
+    </>
   );
 }
 

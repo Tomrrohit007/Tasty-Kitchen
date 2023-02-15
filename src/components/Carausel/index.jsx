@@ -1,13 +1,28 @@
-import {useEffect, useState} from 'react'
-import Cookies from 'js-cookie'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "./index.css"
 
-function Carausel() {
+const offerList = [
+  {
+      "id": 1,
+      "imageUrl": "https://assets.ccbp.in/frontend/react-js/restaurants-app-project/carousel-images-jammu-special.jpg"
+  },
+  {
+      "id": 2,
+      "imageUrl": "https://assets.ccbp.in/frontend/react-js/restaurants-app-project/carousel-images-rajasthani-special.jpg"
+  },
+  {
+      "id": 3,
+      "imageUrl": "https://assets.ccbp.in/frontend/react-js/restaurants-app-project/carousel-images-uttar-pradesh-special.jpg"
+  },
+  {
+      "id": 4,
+      "imageUrl": "https://assets.ccbp.in/frontend/react-js/restaurants-app-project/carousel-images-north-indian-special.jpg"
+  }
+]
 
-    const [offerList, setOfferList] = useState([])
+function Carausel() {
 
     const settings = {
       slidesToShow: 1,
@@ -18,28 +33,6 @@ function Carausel() {
       autoplaySpeed:2000,
       centerMode: true,
     }
-
-    useEffect(()=>{
-        const getOfferList = async ()=>{
-            const jwtToken = Cookies.get('jwt_token')
-            const options = {
-                headers: {
-                  Authorization: `Bearer ${jwtToken}`,
-                },
-                method: 'GET',
-              }
-            const response = await fetch("https://apis.ccbp.in/restaurants-list/offers", options)
-            const fetchedData = await response.json()
-            const {offers} = fetchedData
-            const updatedCaseData = offers.map((eachItem)=>({
-              id:eachItem.id,
-              imageUrl:eachItem.image_url
-            })) 
-            setOfferList(updatedCaseData)
-        }
-        getOfferList()
-
-    },[setOfferList])
 
   return (
     <div className='silder-cont'>

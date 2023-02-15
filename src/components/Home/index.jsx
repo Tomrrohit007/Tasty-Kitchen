@@ -7,6 +7,22 @@ import { BsFilterLeft } from "react-icons/bs";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Cookies from "js-cookie";
 import "./index.css";
+import {motion as m} from "framer-motion"
+
+
+const mainVariants = {
+  initial: {
+    y: "30",
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
 
 
 const sortByOptions = [
@@ -111,7 +127,17 @@ function Home() {
   };
 
   const fullView=()=>{
-   return <div className="home-cont">
+   return <m.div       variants={mainVariants}
+   initial="initial"
+   animate="animate"
+   exit="exit"
+   transition={{
+     damping: 13,
+     mass: 0.6,
+     type: "spring",
+     when: "beforeChildren",
+     ease: "easeInOut",
+   }} className="home-cont">
       <Carausel />
       {FilterCont()}
       <div className="item-list-cont">
@@ -131,7 +157,7 @@ function Home() {
         </div>
       </div>
       <Footer/>
-    </div>
+    </m.div>
 
   }
 

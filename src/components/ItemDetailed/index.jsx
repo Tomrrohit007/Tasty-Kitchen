@@ -7,6 +7,22 @@ import Loader from "../Loader";
 import Footer from "../Footer";
 import "./index.css";
 import { CartGlobal } from "../CartContext/CartListContext";
+import {motion as m } from "framer-motion"
+
+
+const mainVariants = {
+  initial:{
+    y:"100vh"
+  },
+  animate:{
+    y:0
+  },
+    exit:{
+      opacity:0,
+      y:0,
+  }
+}
+
 
 function ItemDetailed() {
   const { id } = useParams();
@@ -177,7 +193,12 @@ function ItemDetailed() {
       {isLoading ? (
         <Loader/>
       ) : (
-        <div className="item-detailed-cont">
+        <m.div variants={mainVariants} animate="animate" initial="initial" exit="exit"  transition={{
+          damping:10,
+          mass:0.3,
+          type:"spring",
+          ease:"easeInOut"
+        }} className="item-detailed-cont">
           {introSection()}
           <ul className="food-items-list">
             {foodList.map((eachItem) => (
@@ -185,7 +206,7 @@ function ItemDetailed() {
             ))}
           </ul>
           <Footer/>
-        </div>
+        </m.div>
       )}
     </>
   );

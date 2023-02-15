@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     background: #F8FAFC;
-    padding: 12px 0px;
+    padding: 4px 0px;
 }
 .logout-btn{
     width: 73px;
@@ -64,4 +64,5 @@ button{
 
 .active{
     color: #F7931E;
+    border-bottom: 2px solid #F7931E;
 }

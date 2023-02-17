@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Link,
   useNavigate,
@@ -10,19 +10,46 @@ import Cookies from "js-cookie";
 import { CartGlobal } from "../CartContext/CartListContext";
 import { HeaderGlobal } from "../CartContext/HeaderContext";
 import "./index.css";
-import { motion as m } from "framer-motion";
+import { motion as m, useScroll } from "framer-motion";
+
+
+const variants = {
+  visible: { y:0,
+    opacity:1
+  },
+  hidden: { y:"-80px", opacity:0.4}
+};
 
 function Header() {
   const { cartList } = CartGlobal();
   const { activeRoute, changeRoute } = HeaderGlobal();
   const cartCount = cartList.length;
-
   let navigate = useNavigate();
   let location = useLocation();
+  const {scrollY} = useScroll()
+
+  const [hidden, setHidden] = useState(false);
+
+
+  function update() {
+    if (scrollY?.current < scrollY?.prev) {
+      setHidden(false);
+      console.log("visible");
+    } else if (scrollY?.current > 70 && scrollY?.current > scrollY?.prev) {
+      setHidden(true);
+      console.log("hidden");
+    }
+  }
 
   useEffect(() => {
     changeRoute(location.pathname);
-  });
+  }, []);
+
+  useEffect(()=>{
+    return scrollY.onChange(()=>update())
+  }, [])
+
+
 
   const onClickLogout = () => {
     Cookies.remove("jwt_token");
@@ -41,7 +68,16 @@ function Header() {
 
   return (
     <>
-      <nav className="main-nav">
+      <m.nav   
+      variants={variants}
+      animate={hidden? "hidden" : "visible"}
+      transition={{ ease: [0.1, 0.25, 0.3, 1],
+        type:"spring",
+        mass:0.4,
+        damping:12,
+        bounce:10
+      }}
+       className="main-nav">
         <div className="header-main-cont">
           <button className="nav-bar" onClick={onClickLogo}>
             <img
@@ -93,7 +129,7 @@ function Header() {
             </li>
           </ul>
         </div>
-      </nav>
+      </m.nav>
       <Outlet />
     </>
   );

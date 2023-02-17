@@ -1,10 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CartItem from "../CartItem";
 import Footer from "../Footer";
 import "./index.css";
 import { CartGlobal } from "../CartContext/CartListContext";
-import {AnimatePresence ,motion as m } from "framer-motion";
+
+import {useAnimation, motion as m, AnimatePresence} from "framer-motion"
+import { useInView } from "react-intersection-observer";
+
+
+const itemVariants = {
+  initial:{
+    opacity:0,
+    y:-30
+  },
+  visible:{
+    opacity:1,
+    y:0,
+    transition:{
+      duration:0.4,
+      delay:0.12
+    }
+  },
+  exit:{
+    opacity: 0,
+  }
+}
+  
+
+
 
 const typesList = [
   { id: 1, name: "Item", class: "item" },
@@ -30,12 +54,21 @@ const mainVariants = {
 function Cart() {
   let navigate = useNavigate();
   const { cartList, setCartList } = CartGlobal();
-
+  
   const [countQuantity, setQuantity] = useState(0);
 
+  const controls = useAnimation()
+  const [ref, inView] = useInView({rootMargin:"-100px 0px"})
+  
+  useEffect(()=>{
+    if(inView){
+      controls.start("visible")
+    }
+  }, [inView, controls])
+  
   const removeItemFromCart = (id) => {
     setCartList((prevList) =>
-      prevList.filter((eachCartItem) => eachCartItem.id !== id)
+    prevList.filter((eachCartItem) => eachCartItem.id !== id)
     );
   };
 
@@ -85,7 +118,7 @@ function Cart() {
         when: "beforeChildren",
         ease: "easeInOut",
       }}
-        className="cart-main"
+        className="cart-main main-container"
       >
         <div className="cart-cont">
           <ul className="types">
@@ -99,20 +132,19 @@ function Cart() {
             className="cart-item-list"
             >
             <AnimatePresence>
-              {cartList.map((eachCartItem, i) => (
+              {cartList.map((eachCartItem) => (
                 <CartItem
                 eachCartItem={eachCartItem}
                 key={eachCartItem.id}
                 increBtn={increBtn}
                 decreBtn={decreBtn}
                 removeItemFromCart={removeItemFromCart}
-                i={i}
                 />
                 ))}
               </AnimatePresence>
           </ul>
           <hr color="#CBD2D9" className="hr" />
-          <div className="total-cost-panel">
+          <m.div ref={ref} variants={itemVariants} animate={controls} initial="initial"  className="total-cost-panel">
             <h1 className="order-total-heading total">Order Total:</h1>
             <span className="price-total">
               <h1 className="total-price-of-cart total">
@@ -126,7 +158,7 @@ function Cart() {
                 Place Order
               </m.button>
             </span>
-          </div>
+          </m.div>
         </div>
         <Footer />
       </m.div>
@@ -147,7 +179,7 @@ function Cart() {
         type: "spring",
         when: "beforeChildren",
         ease: "easeInOut",
-      }} className="no-item-cart-cont">
+      }} className="no-item-cart-cont main-container">
         <img
           src="https://res.cloudinary.com/dzqa2dgzj/image/upload/v1675845284/cooking_1_arcyxq.svg"
           alt=""

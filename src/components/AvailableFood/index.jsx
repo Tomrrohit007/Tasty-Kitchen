@@ -1,17 +1,44 @@
-import { useState } from "react";
-import { motion as m } from "framer-motion";
+import { useState, useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { BsPlus } from "react-icons/bs";
 import { BiMinus } from "react-icons/bi";
 import "./index.css";
+import {useAnimation, motion as m} from "framer-motion"
+import { useInView } from "react-intersection-observer";
+
+
 
 
 function AvailableFood(props) {
-  const { foodItemData, onAddToList, onIncreaseCount, onDecreaseCount } = props;
+  const { foodItemData, onAddToList, onIncreaseCount, onDecreaseCount, index } = props;
   const { cost, name, imageUrl, rating, id } = foodItemData;
-
+  
   const [count, setCount] = useState(1);
   const [foodAdded, changeState] = useState(false);
+  
+  const controls = useAnimation()
+  const [ref, inView] = useInView({rootMargin:"-100px 0px"})
+  
+  const itemVariants = {
+    initial:{
+      opacity:0,
+      y:"10vh"
+    },
+    visible:{
+      opacity:1,
+      y:0,
+      transition:{
+        duration:0.4,
+        delay:0.12*index
+      }
+    }
+  }
+  useEffect(()=>{
+    if(inView){
+      controls.start("visible")
+    }
+  }, [inView, controls])
+
 
   const onClickPlus = () => {
     setCount((prev) => prev + 1);
@@ -51,7 +78,7 @@ function AvailableFood(props) {
   };
 
   return (
-    <li className="food-item">
+    <m.li variants={itemVariants} animate={controls} initial="initial" ref={ref} className="food-item">
       <img src={imageUrl} alt="" className="food-img" />
       <div className="text-cont">
         <p className="food-name">{name}</p>
@@ -71,7 +98,7 @@ function AvailableFood(props) {
           foodQuantity()
         )}
       </div>
-    </li>
+    </m.li>
   );
 }
 export default AvailableFood;

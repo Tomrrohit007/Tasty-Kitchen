@@ -198,11 +198,11 @@ function ItemDetailed() {
           mass:0.3,
           type:"spring",
           ease:"easeInOut"
-        }} className="item-detailed-cont">
+        }} className="item-detailed-cont main-container">
           {introSection()}
           <ul className="food-items-list">
-            {foodList.map((eachItem) => (
-              <AvailableFood foodItemData={eachItem} key={eachItem.id} onIncreaseCount={onIncreaseCount} onDecreaseCount={onDecreaseCount} onAddToList={onAddToList}/>
+            {foodList.map((eachItem, i) => (
+              <AvailableFood foodItemData={eachItem} key={eachItem.id} onIncreaseCount={onIncreaseCount} onDecreaseCount={onDecreaseCount} onAddToList={onAddToList} index={i % 2}/>
             ))}
           </ul>
           <Footer/>

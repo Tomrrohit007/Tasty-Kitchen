@@ -7,8 +7,23 @@ import { BsFilterLeft } from "react-icons/bs";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Cookies from "js-cookie";
 import "./index.css";
-import {motion as m} from "framer-motion"
+import { useAnimation, motion as m } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
+const itemVariants = {
+  initial: {
+    opacity: 0,
+    y: "10vh",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.12,
+      delay: 0.05,
+    },
+  },
+};
 
 const mainVariants = {
   initial: {
@@ -17,13 +32,12 @@ const mainVariants = {
   },
   animate: {
     y: 0,
-    opacity: 1,
+    opacity: 1
   },
   exit: {
     opacity: 0,
   },
 };
-
 
 const sortByOptions = [
   {
@@ -35,29 +49,37 @@ const sortByOptions = [
     id: 2,
     displayText: "Highest",
     value: "Highest",
-  }
+  },
 ];
 function Home() {
   const [restaurantList, setRestaurantList] = useState([]);
   const [sortBy, setSortBy] = useState("");
   const [activePage, setActivePage] = useState(1);
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false);
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ rootMargin: "-140px 0px" });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [inView, controls]);
 
   const decreaseIndex = () => {
-    if(activePage>1){
-      setActivePage((prev) => prev - 1)
-    };
+    if (activePage > 1) {
+      setActivePage((prev) => prev - 1);
+    }
   };
   const increaseIndex = () => {
-    if(activePage<4){
-      setActivePage((prev) => prev + 1)
+    if (activePage < 4) {
+      setActivePage((prev) => prev + 1);
     }
   };
 
   //Restaurant List API Call
   useEffect(() => {
     const getRestaurantList = async () => {
-      setLoading(true)
+      setLoading(true);
       const offset = (activePage - 1) * 9;
       const apiUrl = `https://apis.ccbp.in/restaurants-list?sort_by_rating=${sortBy}&offset=${offset}&limit=9`;
       const jwtToken = Cookies.get("jwt_token");
@@ -80,13 +102,10 @@ function Home() {
         cuisine: eachItem.cuisine,
       }));
       setRestaurantList(updatedData);
-        setLoading(false)
+      setLoading(false);
     };
-    getRestaurantList();   //Calling API Func
+    getRestaurantList(); //Calling API Func
   }, [sortBy, activePage]);
-
-
-
 
   //filter Section
   const FilterCont = () => {
@@ -94,7 +113,10 @@ function Home() {
       <div className="items-cont">
         <div className="upper-section">
           <div>
-            <h1 className="restaurants-heading">Popular Restaurants</h1>
+            <h1
+              className="restaurants-heading">
+              Popular Restaurants
+            </h1>
             <p className="para">
               Select Your favourite restaurant special dish and make your day
               happy.
@@ -126,48 +148,52 @@ function Home() {
     );
   };
 
-  const fullView=()=>{
-   return <m.div       variants={mainVariants}
-   initial="initial"
-   animate="animate"
-   exit="exit"
-   transition={{
-     damping: 13,
-     mass: 0.6,
-     type: "spring",
-     when: "beforeChildren",
-     ease: "easeInOut",
-   }} className="home-cont">
-      <Carausel />
-      {FilterCont()}
-      <div className="item-list-cont">
-        <ul className="items-list">
-          {restaurantList.map((each) => (
-            <FoodItem details={each} key={each.id} />
-          ))}
-        </ul>
-        <div className="pagination-cont">
-          <button className="previous-btn" onClick={decreaseIndex}>
-            <GrPrevious className="arrow" />
-          </button>
-          <p className="pagination-para">{activePage} of 4</p>
-          <button className="next-btn" onClick={increaseIndex}>
-            <GrNext className="arrow" />
-          </button>
+  const fullView = () => {
+    return (
+      <m.div
+        variants={mainVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={{
+          damping: 13,
+          mass: 0.6,
+          type: "spring",
+          when: "beforeChildren",
+          ease: "easeInOut",
+        }}
+        className="home-cont main-container"
+      >
+        <Carausel />
+        {FilterCont()}
+        <div className="item-list-cont">
+          <ul className="items-list">
+            {restaurantList.map((each, i) => (
+              <FoodItem details={each} key={each.id} i={i % 3} />
+            ))}
+          </ul>
+          <m.div
+          variants={itemVariants}
+          initial="initial"
+          animate={controls}
+          ref={ref}
+          className="pagination-cont">
+            <button className="previous-btn" onClick={decreaseIndex}>
+              <GrPrevious className="arrow" />
+            </button>
+            <p className="pagination-para">{activePage} of 4</p>
+            <button className="next-btn" onClick={increaseIndex}>
+              <GrNext className="arrow" />
+            </button>
+          </m.div>
         </div>
-      </div>
-      <Footer/>
-    </m.div>
-
-  }
-
+        <Footer />
+      </m.div>
+    );
+  };
 
   // main render
-  return (
-    <>
-    {isLoading?(Loader()):(fullView())}
-    </>
-  )
+  return <>{isLoading ? Loader() : fullView()}</>;
 }
 
 export default Home;

@@ -31,7 +31,7 @@ function PaymentPage() {
         when: "beforeChildren",
         ease: "easeInOut",
       }}
-      className="payment-cont"
+      className="payment-cont main-container"
     >
       <img
         src="https://res.cloudinary.com/dzqa2dgzj/image/upload/v1676219736/Zomato%20clone/check-circle.1_1_ivhodq.svg"

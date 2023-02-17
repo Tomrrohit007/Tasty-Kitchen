@@ -1,6 +1,6 @@
 .footer{
     width: 99vw;
-    height: 324px;
+    padding: 70px 0px;
     background: #0F172A;
     display: flex;
     flex-direction: column;

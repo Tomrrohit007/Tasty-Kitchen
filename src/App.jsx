@@ -18,9 +18,7 @@ function App() {
   const { pathname } = location;
 
   useEffect(() => {
-    setTimeout(() => {
       window.scrollTo(0, 0); 
-    }, 400);
   }, [pathname]);
 
   return (

@@ -43,12 +43,8 @@ function Header() {
 
   useEffect(() => {
     changeRoute(location.pathname);
-  }, []);
-
-  useEffect(()=>{
     return scrollY.onChange(()=>update())
-  }, [])
-
+  }, []);
 
 
   const onClickLogout = () => {

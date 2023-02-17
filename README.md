@@ -84,3 +84,5 @@ The app must have the following functionalities
 - When the users enter invalid route in the URL then the Page not found Route should be displayed.
 
 </details>
+- For animations:
+  -framer motion is used

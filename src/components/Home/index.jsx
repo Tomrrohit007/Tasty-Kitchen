@@ -20,7 +20,6 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.12,
-      delay: 0.05,
     },
   },
 };
@@ -155,10 +154,9 @@ function Home() {
         variants={mainVariants}
         initial="initial"
         animate="animate"
-        exit="exit"
         transition={{
-          damping: 13,
-          mass: 0.6,
+          damping: 12,
+          mass: 0.4,
           type: "spring",
           when: "beforeChildren",
           ease: "easeInOut",

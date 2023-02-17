@@ -105,6 +105,7 @@ function Home() {
       setLoading(false);
     };
     getRestaurantList(); //Calling API Func
+    window.scrollTo(0, 0)
   }, [sortBy, activePage]);
 
   //filter Section

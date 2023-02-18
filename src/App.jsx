@@ -16,6 +16,7 @@ const PaymentPage = React.lazy(() => import("./components/PaymentPage"));
 function App() {
   const location = useLocation();
   const { pathname } = location;
+  document.title = "Tasty Kitchen"
 
   useEffect(() => {
       window.scrollTo(0, 0); 
